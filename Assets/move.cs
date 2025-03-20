@@ -8,6 +8,8 @@ public class move : MonoBehaviour
     private int speed = 5;
     public int jumpPower = 500;
     public int jumpCnt = 0;
+    public int a;
+    private int b;
 
     private Vector3 movement;
 
@@ -19,12 +21,11 @@ public class move : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.z = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-        movement.Normalize();
-
-        rigid.velocity = movement * speed;
+        movement = transform.forward * v + transform.right * h;
+        transform.position += movement * speed * Time.deltaTime;
     }
 
     private void Update()
@@ -42,5 +43,6 @@ public class move : MonoBehaviour
         {
             jumpCnt = 0;
         }
+
     }
 }

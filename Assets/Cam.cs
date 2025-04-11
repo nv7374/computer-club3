@@ -26,6 +26,6 @@ public class Cam : MonoBehaviour
 
         xrot = Mathf.Clamp(xrot, -70f, 70f);
         cam.transform.rotation = Quaternion.Euler(xrot, yrot, 0);
-        player.transform.rotation = Quaternion.Euler(0, yrot, 0);   
+        player.transform.rotation = Quaternion.Euler(0, yrot, 0);
     }
 }

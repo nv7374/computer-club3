@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour
 {
     public int damage = 5;
     private float attackRange = 5f;
@@ -15,7 +14,22 @@ public class Attack : MonoBehaviour
     private float lastAttack = 0;
     private float attackCoolTime = 1f;
 
-    private void AttackSystem()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+            if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
+            
+                if (hit.collider.gameObject.CompareTag("Enemy"))
+                {
+                    Attack();
+                }
+        }
+    }
+
+    void Attack()
     {
         if (Time.time - lastAttack >= attackCoolTime)
         {
@@ -27,21 +41,5 @@ public class Attack : MonoBehaviour
             }
             lastAttack = Time.time;
         }
-    }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-            if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
-            {
-                if (hit.collider.gameObject.CompareTag("Enemy"))
-                {
-                    AttackSystem();
-                }
-            }
-        }
-
     }
 }

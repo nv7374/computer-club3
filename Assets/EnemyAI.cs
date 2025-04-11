@@ -10,17 +10,22 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    private void Start()
+
+    // Start is called before the first frame update
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    private void Update()
+
+    // Update is called once per frame
+    void Update()
     {
-        float distancePlayer =
-            Vector3.Distance(player.position, transform.position);
-        if (distancePlayer < detectionRange)
+        float distancePlaer = Vector3.Distance(transform.position, player.position);
+        if (distancePlaer < detectionRange)
         {
             agent.SetDestination(player.position);
+
         }
+
     }
 }
